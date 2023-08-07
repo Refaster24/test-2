@@ -40,50 +40,42 @@
 </html> -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JavaScript Notification Example</title>
-</head>
+    <head>
+        <!-- Add other meta tags, title, etc. here -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+        <!-- OneSignal Web SDK -->
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+      
+        <script>
+          // Initialize OneSignal
+          var OneSignal = window.OneSignal || [];
+          OneSignal.push(function() {
+            OneSignal.init({
+              appId: '2eed0c12-b76f-4347-8615-00bba494e600', // Replace with your OneSignal app ID
+            });
+          });
+        </script>
+      </head>
+      
 <body>
   <button id="notifyBtn">Notify Me</button>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const notifyBtn = document.getElementById('notifyBtn');
-
-      notifyBtn.addEventListener('click', () => {
-        // Request notification permission
-        Notification.requestPermission().then((permission) => {
-          if (permission === 'granted') {
-            showNotification();
-          } else {
-            alert('Permission to show notifications denied.');
-          }
-        });
-      });
-
-      function showNotification() {
-        if ('Notification' in window) {
-          const options = {
-            body: 'Hello, this is a notification!',
-            icon: './four-star-dragon-ball.png', // Add your notification icon path here
-          };
-
-          // Check if notifications are supported by the browser
-          if (Notification.permission === 'granted') {
-            new Notification('Notification Example', options);
-          } else if (Notification.permission !== 'denied') {
-            // Request notification permission again if it was not denied
-            Notification.requestPermission().then((permission) => {
-              if (permission === 'granted') {
-                new Notification('Notification Example', options);
-              }
-            });
-          }
-        }
+  const notifyButton = document.getElementById('notifyBtn');
+  notifyButton.addEventListener('click', () => {
+    Notification.requestPermission().then((permission) => {
+      if (permission === 'granted') {
+        // User has granted permission, subscribe to push notifications
+        OneSignal.push(['registerForPushNotifications']);
       }
     });
+  });
+});
+
   </script>
 </body>
 </html>
