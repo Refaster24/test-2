@@ -79,5 +79,19 @@
 });
 
   </script>
+  <script>
+    // Event listener for incoming push notifications
+    OneSignal.on('notificationDisplay', event => {
+      const notification = event.data;
+      console.log('Received push notification:', notification);
+    });
+  
+    // Event listener for user interaction with notifications
+    OneSignal.on('notificationClicked', event => {
+      const notification = event.data;
+      console.log('User clicked on notification:', notification);
+      // Handle the user's action here, e.g., redirect to a specific page.
+    });
+  </script>
 </body>
 </html>
