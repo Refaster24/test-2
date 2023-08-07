@@ -38,60 +38,59 @@
     //     });
     //   }
     </script>
-  </body>
+</body>
 </html> -->
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Add other meta tags, title, etc. here -->
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Document</title>
-        <!-- OneSignal Web SDK -->
-        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-      
-        <script>
-          // Initialize OneSignal
-          var OneSignal = window.OneSignal || [];
-          OneSignal.push(function() {
-            OneSignal.init({
-              appId: '2eed0c12-b76f-4347-8615-00bba494e600', // Replace with your OneSignal app ID
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneSignal Push Notifications Example</title>
+
+  <!-- OneSignal Web SDK -->
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+
+  <script>
+    // Initialize OneSignal with your OneSignal App ID
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+      OneSignal.init({
+        appId: 'YOUR_ONE_SIGNAL_APP_ID', // Replace with your OneSignal App ID
+      });
+    });
+
+    // Add an event listener to handle incoming push notifications
+    OneSignal.push(function() {
+      OneSignal.on('notificationDisplay', event => {
+        const notification = event.data;
+        console.log('Received push notification:', notification);
+      });
+
+      // Add an event listener to handle user interaction with notifications
+      OneSignal.on('notificationClicked', event => {
+        const notification = event.data;
+        console.log('User clicked on notification:', notification);
+        // Handle the user's action here, e.g., redirect to a specific page.
+      });
+    });
+
+    // Function to request notification permission and subscribe to push notifications
+    function subscribeToPushNotifications() {
+      if ('Notification' in window) {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            OneSignal.push(() => {
+              OneSignal.registerForPushNotifications();
             });
-          });
-        </script>
-      </head>
-      
-<body>
-  <button id="notifyBtn">Notify Me</button>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-  const notifyButton = document.getElementById('notifyBtn');
-  notifyButton.addEventListener('click', () => {
-    Notification.requestPermission().then((permission) => {
-      if (permission === 'granted') {
-        // User has granted permission, subscribe to push notifications
-        OneSignal.push(['registerForPushNotifications']);
+          }
+        });
       }
-    });
-  });
-});
+    }
+  </script>
+</head>
+<body>
+  <h1>Welcome to My Web App</h1>
 
-  </script>
-  <script>
-    // Event listener for incoming push notifications
-    OneSignal.on('notificationDisplay', event => {
-      const notification = event.data;
-      console.log('Received push notification:', notification);
-    });
-  
-    // Event listener for user interaction with notifications
-    OneSignal.on('notificationClicked', event => {
-      const notification = event.data;
-      console.log('User clicked on notification:', notification);
-      // Handle the user's action here, e.g., redirect to a specific page.
-    });
-  </script>
+  <button id="subscribeBtn" onclick="subscribeToPushNotifications()">Subscribe to Push Notifications</button>
 </body>
 </html>
