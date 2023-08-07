@@ -59,38 +59,48 @@
       });
     });
 
-    // Add an event listener to handle incoming push notifications
-    OneSignal.push(function() {
-      OneSignal.on('notificationDisplay', event => {
-        const notification = event.data;
-        console.log('Received push notification:', notification);
-      });
+    // // Add an event listener to handle incoming push notifications
+    // OneSignal.push(function() {
+    //   OneSignal.on('notificationDisplay', event => {
+    //     const notification = event.data;
+    //     console.log('Received push notification:', notification);
+    //   });
 
-      // Add an event listener to handle user interaction with notifications
-      OneSignal.on('notificationClicked', event => {
-        const notification = event.data;
-        console.log('User clicked on notification:', notification);
-        // Handle the user's action here, e.g., redirect to a specific page.
-      });
-    });
+    //   // Add an event listener to handle user interaction with notifications
+    //   OneSignal.on('notificationClicked', event => {
+    //     const notification = event.data;
+    //     console.log('User clicked on notification:', notification);
+    //     // Handle the user's action here, e.g., redirect to a specific page.
+    //   });
+    // });
 
-    // Function to request notification permission and subscribe to push notifications
-    function subscribeToPushNotifications() {
-      if ('Notification' in window) {
-        Notification.requestPermission().then(permission => {
-          if (permission === 'granted') {
-            OneSignal.push(() => {
-              OneSignal.registerForPushNotifications();
-            });
-          }
-        });
-      }
-    }
+    // // Function to request notification permission and subscribe to push notifications
+    // function subscribeToPushNotifications() {
+    //   if ('Notification' in window) {
+    //     Notification.requestPermission().then(permission => {
+    //       if (permission === 'granted') {
+    //         OneSignal.push(() => {
+    //           OneSignal.registerForPushNotifications();
+    //         });
+    //       }
+    //     });
+    //   }
+    // }
+    // onclick="subscribeToPushNotifications()"
   </script>
 </head>
 <body>
   <h1>Welcome to My Web App</h1>
 
-  <button id="subscribeBtn" onclick="subscribeToPushNotifications()">Subscribe to Push Notifications</button>
+  <button id="subscribeBtn" >Subscribe to Push Notifications</button>
+
+  <script>
+    document.getElementById('subscribeBtn').addEventListener('click', () => {
+      // Request notification permission and subscribe to push notifications
+      OneSignal.push(() => {
+        OneSignal.registerForPushNotifications();
+      });
+    });
+  </script>
 </body>
 </html>
