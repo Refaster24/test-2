@@ -20,6 +20,11 @@
         });
         console.log(JSON.stringify(push));
         document.getElementById('lol').innerHTML = `${JSON.stringify(push)}`
+        setTimeout(()=>{
+          Notification.requestPermission().then(()=>{
+              new Notification('hi')
+          })
+        },12000)
       }
 
       if ('serviceWorker' in navigator) {
