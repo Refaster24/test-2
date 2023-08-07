@@ -11,28 +11,30 @@
     <div id="lol"></div>
 
     <script>
-      async function subscribe() {
-        let sw = await navigator.serviceWorker.ready;
-        let push = await sw.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey:
-            'BBZY7Q3KEtZArAAWMLi_qzWHbH4vAoqPpIXnRhmlUaw0PVs1Kt_2fgLhuaVI5i8MWASBKx3d6W6UoH2U3qChw9U'
-        });
-        console.log(JSON.stringify(push));
-        document.getElementById('lol').innerHTML = `${JSON.stringify(push)}`
+       function subscribe() {
+        // let sw = await navigator.serviceWorker.ready;
+        // let push = await sw.pushManager.subscribe({
+        //   userVisibleOnly: true,
+        //   applicationServerKey:
+        //     'BBZY7Q3KEtZArAAWMLi_qzWHbH4vAoqPpIXnRhmlUaw0PVs1Kt_2fgLhuaVI5i8MWASBKx3d6W6UoH2U3qChw9U'
+        // });
+        // console.log(JSON.stringify(push));
+        // document.getElementById('lol').innerHTML = `${JSON.stringify(push)}`
         setTimeout(()=>{
           Notification.requestPermission().then(()=>{
               new Notification('hi')
+        document.getElementById('lol').innerHTML = 'h'
           })
         },12000)
+        document.getElementById('lol').innerHTML = 'hi'
       }
 
-      if ('serviceWorker' in navigator) {
-        addEventListener('load', async () => {
-          let sw = await navigator.serviceWorker.register('./sw.js');
-          console.log(sw);
-        });
-      }
+    //   if ('serviceWorker' in navigator) {
+    //     addEventListener('load', async () => {
+    //       let sw = await navigator.serviceWorker.register('./sw.js');
+    //       console.log(sw);
+    //     });
+    //   }
     </script>
   </body>
 </html>
