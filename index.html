@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -37,4 +37,53 @@
     //   }
     </script>
   </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Notification Example</title>
+</head>
+<body>
+  <button id="notifyBtn">Notify Me</button>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const notifyBtn = document.getElementById('notifyBtn');
+
+      notifyBtn.addEventListener('click', () => {
+        // Request notification permission
+        Notification.requestPermission().then((permission) => {
+          if (permission === 'granted') {
+            showNotification();
+          } else {
+            alert('Permission to show notifications denied.');
+          }
+        });
+      });
+
+      function showNotification() {
+        if ('Notification' in window) {
+          const options = {
+            body: 'Hello, this is a notification!',
+            icon: 'path/to/notification-icon.png', // Add your notification icon path here
+          };
+
+          // Check if notifications are supported by the browser
+          if (Notification.permission === 'granted') {
+            new Notification('Notification Example', options);
+          } else if (Notification.permission !== 'denied') {
+            // Request notification permission again if it was not denied
+            Notification.requestPermission().then((permission) => {
+              if (permission === 'granted') {
+                new Notification('Notification Example', options);
+              }
+            });
+          }
+        }
+      }
+    });
+  </script>
+</body>
 </html>
