@@ -45,10 +45,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OneSignal Push Notifications Example</title>
+  <title>Push Notifications Example</title>
 
-  <!-- OneSignal Web SDK -->
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async defer></script>
+  <!-- Include the OneSignal Web SDK -->
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
 
   <script>
     // Initialize OneSignal with your OneSignal App ID
@@ -58,48 +58,28 @@
         appId: '2eed0c12-b76f-4347-8615-00bba494e600', // Replace with your OneSignal App ID
       });
     });
-
-    // // Add an event listener to handle incoming push notifications
-    // OneSignal.push(function() {
-    //   OneSignal.on('notificationDisplay', event => {
-    //     const notification = event.data;
-    //     console.log('Received push notification:', notification);
-    //   });
-
-    //   // Add an event listener to handle user interaction with notifications
-    //   OneSignal.on('notificationClicked', event => {
-    //     const notification = event.data;
-    //     console.log('User clicked on notification:', notification);
-    //     // Handle the user's action here, e.g., redirect to a specific page.
-    //   });
-    // });
-
-    // // Function to request notification permission and subscribe to push notifications
-    // function subscribeToPushNotifications() {
-    //   if ('Notification' in window) {
-    //     Notification.requestPermission().then(permission => {
-    //       if (permission === 'granted') {
-    //         OneSignal.push(() => {
-    //           OneSignal.registerForPushNotifications();
-    //         });
-    //       }
-    //     });
-    //   }
-    // }
-    // onclick="subscribeToPushNotifications()"
   </script>
 </head>
 <body>
   <h1>Welcome to My Web App</h1>
 
-  <button id="subscribeBtn" >Subscribe to Push Notifications</button>
+  <button id="subscribeBtn">Subscribe to Push Notifications</button>
 
   <script>
-    document.getElementById('subscribeBtn').addEventListener('click', () => {
-      // Request notification permission and subscribe to push notifications
-      OneSignal.push(() => {
-        OneSignal.registerForPushNotifications();
-      });
+    document.getElementById('subscribeBtn').addEventListener('click', async () => {
+      try {
+        // Request notification permission and subscribe to push notifications
+        await OneSignal.push(async () => {
+          const permission = await Notification.requestPermission();
+          if (permission === 'granted') {
+            const playerId = await OneSignal.getUserId();
+            alert('You are now subscribed to push notifications.');
+            // You can send the playerId to your server if needed
+          }
+        });
+      } catch (error) {
+        console.error('Error subscribing to push notifications:', error);
+      }
     });
   </script>
 </body>
