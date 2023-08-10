@@ -1,86 +1,13 @@
-<!-- <!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>Vite + React + TS</title>
   </head>
   <body>
-    <button onclick="subscribe()">Subscribe</button>
-    <div id="lol"></div>
-// self.addEventListener('push', () => {
-//     self.registration.showNotification('Hello world!', options);
-//   });
-    <script>
-       function subscribe() {
-        // let sw = await navigator.serviceWorker.ready;
-        // let push = await sw.pushManager.subscribe({
-        //   userVisibleOnly: true,
-        //   applicationServerKey:
-        //     'BBZY7Q3KEtZArAAWMLi_qzWHbH4vAoqPpIXnRhmlUaw0PVs1Kt_2fgLhuaVI5i8MWASBKx3d6W6UoH2U3qChw9U'
-        // });
-        // console.log(JSON.stringify(push));
-        // document.getElementById('lol').innerHTML = `${JSON.stringify(push)}`
-        // setTimeout(()=>{
-        //   Notification.requestPermission().then(()=>{
-              new Notification('hi')
-        document.getElementById('lol').innerHTML = 'h'
-        //   })
-        // },12000)
-        document.getElementById('lol').innerHTML = 'hi'
-      }
-
-    //   if ('serviceWorker' in navigator) {
-    //     addEventListener('load', async () => {
-    //       let sw = await navigator.serviceWorker.register('./sw.js');
-    //       console.log(sw);
-    //     });
-    //   }
-    </script>
-</body>
-</html> -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Push Notifications Example</title>
-
-  <!-- Include the OneSignal Web SDK -->
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-
-  <script>
-    // Initialize OneSignal with your OneSignal App ID
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-      OneSignal.init({
-        appId: '2eed0c12-b76f-4347-8615-00bba494e600', // Replace with your OneSignal App ID
-      });
-    });
-  </script>
-</head>
-<body>
-  <h1>Welcome to My Web App</h1>
-
-  <button id="subscribeBtn">Subscribe to Push Notifications</button>
-
-  <script>
-    document.getElementById('subscribeBtn').addEventListener('click', async () => {
-      try {
-        // Request notification permission and subscribe to push notifications
-        await OneSignal.push(async () => {
-          const permission = await Notification.requestPermission();
-          if (permission === 'granted') {
-            const playerId = await OneSignal.getUserId();
-            alert('You are now subscribed to push notifications.');
-            // You can send the playerId to your server if needed
-          }
-        });
-      } catch (error) {
-        console.error('Error subscribing to push notifications:', error);
-      }
-    });
-  </script>
-</body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
