@@ -27,7 +27,7 @@ const App: React.FC = () => {
               client_id: '314787974343052',
               client_secret: 'ff8acfe4bc105cdfa7faff1ab5790ebc',
               grant_type: 'authorization_code',
-              redirect_uri: 'https://fanciful-daffodil-e37030.netlify.app/',
+              redirect_uri: 'https://fanciful-daffodil-e37030.netlify.app/auth',
               code: code,
             }),
             headers: {
