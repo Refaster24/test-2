@@ -50,7 +50,7 @@ const App: React.FC = () => {
   //     console.error('Error:', error);
   //   }
   // };
-
+setUser(null)
   return (
     <div className="App">
       <h1>Connect with Instagram</h1>
