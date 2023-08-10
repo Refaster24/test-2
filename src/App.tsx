@@ -6,7 +6,7 @@ interface InstagramUser {
   full_name: string;
   profile_picture: string;
 }
-
+// "react-facebook-login": "^4.1.1"
 const App: React.FC = () => {
   const [user, setUser] = useState<InstagramUser | null>(null);
 
