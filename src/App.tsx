@@ -13,7 +13,7 @@ const App: React.FC = () => {
   const handleInstagramLogin = async () => {
     try {
       const response = await fetch(
-        `https://api.instagram.com/oauth/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&scope=user_profile,user_media&response_type=code`
+        `https://api.instagram.com/oauth/authorize?client_id=1291562164795787&redirect_uri=https://fanciful-daffodil-e37030.netlify.app/&scope=user_profile,user_media&response_type=code`
       );
 
       if (response.ok) {
@@ -24,10 +24,10 @@ const App: React.FC = () => {
           {
             method: 'POST',
             body: JSON.stringify({
-              client_id: 'YOUR_CLIENT_ID',
-              client_secret: 'YOUR_CLIENT_SECRET',
+              client_id: '314787974343052',
+              client_secret: 'ff8acfe4bc105cdfa7faff1ab5790ebc',
               grant_type: 'authorization_code',
-              redirect_uri: 'YOUR_REDIRECT_URI',
+              redirect_uri: 'https://fanciful-daffodil-e37030.netlify.app/',
               code: code,
             }),
             headers: {
